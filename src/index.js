@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 // const admin = require("firebase-admin");
+var cors = require('cors')
 
 const router = require("./api");
 const { logger } = require("./utils/logger");
@@ -8,6 +9,8 @@ const { errorHandler } = require("./middleware/error-handler");
 
 // Create a new express application instance
 const app = express();
+
+app.use(cors());
 
 // The port the express app will listen on
 const port = process.env.PORT || 8081;

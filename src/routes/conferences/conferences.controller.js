@@ -8,7 +8,8 @@ citiesRef
   .then(snapshot => {
     snapshot.forEach(doc => {
       allCities.push({
-        [doc.id]: doc.data()
+        id: doc.id,
+        ...doc.data()
       });
     });
   })

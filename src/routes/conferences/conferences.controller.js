@@ -17,13 +17,24 @@ citiesRef
     console.log('Error getting documents', err);
   });
 
-const conferenceController = (req, res) => {
+const getConferences = (req, res) => {
   //connect to firebase and get snapshot of conferences collection
   res.json({
     data: allCities
   });
 };
 
+const addConference = (req, res) => {
+  citiesRef
+    .add({
+      ...req.body
+    })
+    .then(docRef => {
+      console.log('Document written with ID: ', docRef.id);
+    });
+};
+
 module.exports = {
-  conferenceController
+  getConferences,
+  addConference
 };

@@ -11,6 +11,7 @@ const { errorHandler } = require('./middleware/error-handler');
 const app = express();
 
 app.use(cors());
+app.use(express.json());
 
 // The port the express app will listen on
 const port = process.env.PORT || 8081;

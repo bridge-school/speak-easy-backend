@@ -31,7 +31,9 @@ const addConference = (req, res) => {
     })
     .then(docRef => {
       console.log('Document written with ID: ', docRef.id);
-    });
+      res.sendStatus(200);
+    })
+    .catch(() => res.status(500).send({ error: 'Something went wrong!!' }));
 };
 
 module.exports = {

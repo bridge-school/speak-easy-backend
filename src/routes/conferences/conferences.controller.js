@@ -1,27 +1,26 @@
 const db = require('../../db');
 
 let citiesRef = db.collection('conferences');
-let allCities = [];
-
-citiesRef
-  .get()
-  .then(snapshot => {
-    snapshot.forEach(doc => {
-      allCities.push({
-        id: doc.id,
-        ...doc.data()
-      });
-    });
-  })
-  .catch(err => {
-    console.log('Error getting documents', err);
-  });
 
 const getConferences = (req, res) => {
-  //connect to firebase and get snapshot of conferences collection
-  res.json({
-    data: allCities
-  });
+  citiesRef
+    .get()
+    .then(snapshot => {
+      res.json({
+        data: snapshot.docs.map(doc => {
+          return {
+            id: doc.id,
+            ...doc.data()
+          };
+        })
+      });
+    })
+    .catch(err => {
+      console.log('Error getting documents', err);
+      res.json({
+        data: 'There was an error getting data'
+      });
+    });
 };
 
 const addConference = (req, res) => {
